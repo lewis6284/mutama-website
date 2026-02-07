@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie - Maison de Passage Mutama</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+        * { font-family: 'Poppins', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .btn-primary { @apply bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-md; }
+        .section-title { @apply font-playfair text-4xl md:text-5xl font-bold text-gray-900 mb-10; }
+        .gallery-item { @apply relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer h-64 bg-gradient-to-br from-gray-300 to-gray-400 group transform hover:-translate-y-3 border-b-4 border-amber-600 zoom-enter; }
+        .gallery-item img { @apply w-full h-full object-cover group-hover:scale-125 transition-transform duration-700; }
+        .lightbox { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.98); }
+        .lightbox.active { display: flex; align-items: center; justify-content: center; animation: fadeIn 0.3s ease-out; }
+        .lightbox-content { max-width: 90vw; max-height: 90vh; position: relative; animation: scaleIn 0.3s ease-out; }
+        .lightbox-img { max-width: 100%; max-height: 85vh; object-fit: contain; }
+        .lightbox-close { position: absolute; top: -40px; right: 0; color: white; font-size: 40px; cursor: pointer; transition: all 0.3s; }
+        .lightbox-close:hover { color: #fbbf24; transform: scale(1.2); }
+        .lightbox-prev, .lightbox-next { position: absolute; top: 50%; transform: translateY(-50%); font-size: 30px; color: white; cursor: pointer; transition: all 0.3s; padding: 10px 15px; user-select: none; }
+        .lightbox-prev:hover, .lightbox-next:hover { color: #fbbf24; transform: translateY(-50%) scale(1.2); }
+        .lightbox-prev { left: -60px; }
+        .lightbox-next { right: -60px; }
+        .zoom-enter { animation: scaleIn 0.6s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <header id="header" class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <i class="fas fa-home text-amber-600 text-3xl"></i>
+                    <div>
+                        <h1 class="font-playfair text-2xl font-bold text-gray-900">Mutama</h1>
+                        <p class="text-xs text-gray-600">Maison de Passage</p>
+                    </div>
+                </a>
+                <div id="menu-toggle" class="md:hidden cursor-pointer"><i class="fas fa-bars text-2xl text-gray-900"></i></div>
+                <ul id="nav-menu" class="hidden md:flex space-x-8 text-gray-700 font-medium">
+                    <li><a href="index.html" class="hover:text-amber-600 transition">Accueil</a></li>
+                    <li><a href="index.html#maisons" class="hover:text-amber-600 transition">Appartements</a></li>
+                    <li><a href="galerie.html" class="text-amber-600 font-bold">Galerie</a></li>
+                    <li><a href="reservation.html" class="hover:text-amber-600 transition">Réserver</a></li>
+                    <li><a href="contact.html" class="hover:text-amber-600 transition">Contact</a></li>
+                </ul>
+                <a href="reservation.html" class="hidden md:block btn-primary">Réserver Maintenant</a>
+            </div>
+            <div id="mobile-menu" class="hidden mt-4 flex flex-col space-y-3">
+                <a href="index.html" class="text-gray-700 hover:text-amber-600">Accueil</a>
+                <a href="index.html#maisons" class="text-gray-700 hover:text-amber-600">Appartements</a>
+                <a href="galerie.html" class="text-amber-600 font-bold">Galerie</a>
+                <a href="reservation.html" class="text-gray-700 hover:text-amber-600">Réserver</a>
+                <a href="contact.html" class="text-gray-700 hover:text-amber-600">Contact</a>
+                <a href="reservation.html" class="btn-primary text-center">Réserver Maintenant</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="relative py-16 md:py-24 px-4 bg-gradient-to-b from-white via-gradient-to-br via-gray-50 to-white">
+        <!-- Premium Decorative Elements -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-0 -right-40 w-96 h-96 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+            <div class="absolute bottom-0 -left-40 w-96 h-96 bg-orange-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto text-center">
+            <h1 class="section-title reveal-on-scroll">
+                <i class="fas fa-images text-amber-600 mr-3"></i>Galerie Complète
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto reveal-on-scroll" style="animation-delay: 0.1s;">Découvrez tous nos espaces, aménagements et la beauté de nos appartements et chambres premium</p>
+        </div>
+    </section>
+
+    <section class="relative py-20 md:py-28 px-4 bg-gradient-to-b from-white to-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div id="galerie-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 reveal-on-scroll" style="animation-delay: 0.2s;">
+                <div class="col-span-full flex justify-center items-center py-20"><i class="fas fa-spinner text-5xl text-amber-600 animate-spin"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close">&times;</span>
+            <span class="lightbox-prev">&lt;</span>
+            <img id="lightbox-img" class="lightbox-img" src="" alt="">
+            <span class="lightbox-next">&gt;</span>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-12 px-4 mt-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4"><i class="fas fa-home text-amber-600 text-2xl"></i><h3 class="font-playfair text-2xl font-bold">Mutama</h3></div>
+                    <p class="text-gray-400 text-sm">Maison de Passage Mutama</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Liens Rapides</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="index.html" class="hover:text-amber-600 transition">Accueil</a></li>
+                        <li><a href="index.html#maisons" class="hover:text-amber-600 transition">Appartements</a></li>
+                        <li><a href="galerie.html" class="hover:text-amber-600 transition">Galerie</a></li>
+                        <li><a href="reservation.html" class="hover:text-amber-600 transition">Réserver</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Nous Contacter</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-center space-x-2"><i class="fas fa-phone text-amber-600"></i><span>+257 XX XXX XXXX</span></li>
+                        <li class="flex items-center space-x-2"><i class="fas fa-envelope text-amber-600"></i><span>contact@mutama.bi</span></li>
+                        <li class="flex items-center space-x-2"><i class="fas fa-map-marker-alt text-amber-600"></i><span>Burundi</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center"><p class="text-gray-500 text-sm">© 2026 Mutama. Tous droits réservés.</p></div>
+        </div>
+    </footer>
+
+    <script>
+        const API_BASE = 'https://capbio.bi/mutama/api/';
+        let allImages = [];
+        let lightboxIndex = 0;
+
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.animation = 'slideInUp 0.8s ease-out forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with reveal-on-scroll class
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        document.querySelector('.lightbox-close').addEventListener('click', () => {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        document.querySelector('.lightbox-next').addEventListener('click', () => {
+            lightboxIndex = (lightboxIndex + 1) % allImages.length;
+            document.getElementById('lightbox-img').src = allImages[lightboxIndex];
+        });
+        document.querySelector('.lightbox-prev').addEventListener('click', () => {
+            lightboxIndex = (lightboxIndex - 1 + allImages.length) % allImages.length;
+            document.getElementById('lightbox-img').src = allImages[lightboxIndex];
+        });
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('lightbox').classList.contains('active')) {
+                if (e.key === 'ArrowRight') {
+                    lightboxIndex = (lightboxIndex + 1) % allImages.length;
+                    document.getElementById('lightbox-img').src = allImages[lightboxIndex];
+                } else if (e.key === 'ArrowLeft') {
+                    lightboxIndex = (lightboxIndex - 1 + allImages.length) % allImages.length;
+                    document.getElementById('lightbox-img').src = allImages[lightboxIndex];
+                } else if (e.key === 'Escape') {
+                    document.getElementById('lightbox').classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+
+        async function loadGallery() {
+            try {
+                const [apartments, rooms, files, posts] = await Promise.all([
+                    fetch(API_BASE + 'appartment').then(r => r.json()),
+                    fetch(API_BASE + 'room').then(r => r.json()),
+                    fetch(API_BASE + 'file').then(r => r.json()),
+                    fetch(API_BASE + 'post').then(r => r.json())
+                ]);
+
+                if (apartments && apartments.length > 0) {
+                    apartments.forEach(apt => {
+                        if (apt.images) apt.images.forEach(img => allImages.push(img.url || img));
+                    });
+                }
+                if (rooms && rooms.length > 0) {
+                    rooms.forEach(room => {
+                        if (room.images) room.images.forEach(img => allImages.push(img.url || img));
+                    });
+                }
+                if (files && files.length > 0) {
+                    files.forEach(file => {
+                        if (file.url) allImages.push(file.url);
+                    });
+                }
+                if (posts && posts.length > 0) {
+                    posts.forEach(post => {
+                        if (post.heroImage) allImages.push(post.heroImage.url || post.heroImage);
+                    });
+                }
+
+                const container = document.getElementById('galerie-container');
+                container.innerHTML = '';
+                allImages.forEach((imageUrl, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'gallery-item group';
+                    
+                    const img = document.createElement('img');
+                    img.src = imageUrl;
+                    img.alt = `Image ${index + 1}`;
+                    img.onerror = function() { this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23ddd" width="400" height="300"/%3E%3Ctext x="50%" y="50%" font-size="16" fill="%23999" text-anchor="middle" dy=".3em"%3EImage indisponible%3C/text%3E%3C/svg%3E'; };
+                    
+                    // Overlay with counter
+                    const overlay = document.createElement('div');
+                    overlay.className = 'absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300 z-10 flex items-end justify-start p-4';
+                    overlay.innerHTML = `<span class="bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-semibold">${index + 1}/${allImages.length}</span>`;
+                    
+                    item.appendChild(img);
+                    item.appendChild(overlay);
+                    
+                    item.addEventListener('click', () => {
+                        lightboxIndex = index;
+                        document.getElementById('lightbox-img').src = allImages[index];
+                        document.getElementById('lightbox').classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    });
+                    container.appendChild(item);
+                });
+            } catch (error) {
+                console.error('Gallery Error:', error);
+                document.getElementById('galerie-container').innerHTML = '<p class="col-span-full text-red-600 text-center text-lg">Erreur de chargement de la galerie</p>';
+            }
+        }
+        loadGallery();
+    </script>
+</body>
+</html>

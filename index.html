@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison de Passage Mutama - Chambres et Appartements</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+        }
+
+        .animated-text {
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .animated-text:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .animated-text:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .animated-text:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .animated-text:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes floatUp {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(217, 119, 6, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(217, 119, 6, 0.6);
+            }
+        }
+
+        @keyframes pulse-scale {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes point-down {
+            0%, 20%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(10px) scale(1.1);
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes pointer-finger {
+            0%, 100% { transform: rotate(0deg) translateX(0px); }
+            25% { transform: rotate(-5deg) translateX(-2px); }
+            50% { transform: rotate(0deg) translateX(0px); }
+            75% { transform: rotate(5deg) translateX(2px); }
+        }
+
+        .point-animation {
+            animation: point-down 2s ease-in-out infinite;
+        }
+
+        .pointer-icon {
+            animation: pointer-finger 1.5s ease-in-out infinite;
+            transform-origin: right top;
+        }
+
+        @keyframes parallax-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        @keyframes reveal-from-bottom {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoom-in-gentle {
+            from {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .card-hover {
+            @apply transition-all duration-500 ease-out;
+        }
+
+        .parallax-element {
+            animation: parallax-float 6s ease-in-out infinite;
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            animation: reveal-from-bottom 0.8s ease-out forwards;
+        }
+
+        .zoom-enter {
+            animation: zoom-in-gentle 0.6s ease-out;
+        }
+
+        .card-hover:hover {
+            @apply transform -translate-y-2 shadow-2xl;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .btn-primary {
+            @apply bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 ease transform hover:scale-105 hover:shadow-lg;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-primary:hover:before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-hover {
+            @apply transition-all duration-300 ease transform hover:scale-110;
+        }
+
+        .icon-hover {
+            @apply transition-all duration-300 ease transform hover:scale-125 hover:text-amber-600;
+            animation: floatUp 3s ease-in-out infinite;
+        }
+
+        .link-hover {
+            @apply relative transition-all duration-300 ease after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-amber-600 after:transition-all after:duration-300 hover:after:w-full;
+        }
+
+        .section-title {
+            @apply font-playfair text-4xl md:text-5xl font-bold text-gray-900 mb-6;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .animate-in {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .animate-in-delay-1 { animation-delay: 0.1s; }
+        .animate-in-delay-2 { animation-delay: 0.2s; }
+        .animate-in-delay-3 { animation-delay: 0.3s; }
+        .animate-in-delay-4 { animation-delay: 0.4s; }
+        .animate-in-delay-5 { animation-delay: 0.5s; }
+
+        .value-card {
+            animation: bounceIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .value-card:nth-child(1) { animation-delay: 0s; }
+        .value-card:nth-child(2) { animation-delay: 0.1s; }
+        .value-card:nth-child(3) { animation-delay: 0.2s; }
+        .value-card:nth-child(4) { animation-delay: 0.3s; }
+        .value-card:nth-child(5) { animation-delay: 0.4s; }
+
+        .value-card:hover {
+            animation: pulse-scale 0.6s ease-in-out;
+        }
+
+        /* Container fixes */
+        main {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        section {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .max-w-7xl {
+            width: 100%;
+            max-width: 100%;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .max-w-7xl {
+                max-width: 1280px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        img {
+            aspect-ratio: 1;
+            object-fit: cover;
+        }
+
+        header {
+            animation: slideInDown 0.6s ease-out;
+        }
+
+        .hero-content {
+            animation: scaleIn 1s ease-out;
+        }
+
+        .gallery-item {
+            animation: slideInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.3s; }
+    </style>
+</head>
+
+<body class="bg-gray-50 w-screen overflow-x-hidden pt-20">
+    <!-- HEADER / NAVIGATION -->
+    <header id="header" class="bg-white shadow-md fixed top-0 left-0 right-0 z-50 w-full">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-home text-amber-600 text-3xl"></i>
+                    <div>
+                        <h1 class="font-playfair text-2xl font-bold text-gray-900">Mutama</h1>
+                        <p class="text-xs text-gray-600">Maison de Passage</p>
+                    </div>
+                </div>
+
+                <div id="menu-toggle" class="md:hidden cursor-pointer">
+                    <i class="fas fa-bars text-2xl text-gray-900"></i>
+                </div>
+
+                <ul id="nav-menu" class="hidden md:flex space-x-8 text-gray-700 font-medium">
+                    <li><a href="#home" class="hover:text-amber-600 transition">Accueil</a></li>
+                    <li><a href="#maisons" class="hover:text-amber-600 transition">Appartements</a></li>
+                    <li><a href="galerie.html" class="hover:text-amber-600 transition">Galerie</a></li>
+                    <li><a href="reservation.html" class="hover:text-amber-600 transition">Réserver</a></li>
+                    <li><a href="contact.html" class="hover:text-amber-600 transition">Contact</a></li>
+                </ul>
+
+                <a href="reservation.html" class="hidden md:block btn-primary">
+                    Réserver Maintenant
+                </a>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden mt-4 flex flex-col space-y-3">
+                <a href="#home" class="text-gray-700 hover:text-amber-600">Accueil</a>
+                <a href="#maisons" class="text-gray-700 hover:text-amber-600">Appartements</a>
+                <a href="galerie.html" class="text-gray-700 hover:text-amber-600">Galerie</a>
+                <a href="reservation.html" class="text-gray-700 hover:text-amber-600">Réserver</a>
+                <a href="contact.html" class="text-gray-700 hover:text-amber-600">Contact</a>
+                <a href="reservation.html" class="btn-primary text-center">Réserver Maintenant</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+    <!-- SECTION 1: HERO - PREMIUM VERSION -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden group">
+        <!-- Parallax Background -->
+        <div class="absolute inset-0 bg-cover bg-center transform transition-transform duration-300" id="heroImage"
+            style="background-image: url('assets/images/hero/background image.jpeg'); background-attachment: fixed;">
+        </div>
+        
+        <!-- Premium Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
+        
+        <!-- Animated Decorative Elements -->
+        <div class="absolute top-20 right-10 w-72 h-72 bg-amber-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob parallax-element"></div>
+        <div class="absolute bottom-10 left-10 w-72 h-72 bg-orange-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2 parallax-element"></div>
+
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto zoom-enter">
+            <!-- Subtitle with Icon -->
+            <div class="mb-6 flex items-center justify-center space-x-3">
+                <div class="h-1 w-12 bg-gradient-to-r from-amber-400 to-transparent"></div>
+                <p class="text-amber-300 font-semibold text-sm md:text-base uppercase tracking-widest animated-text">Bienvenue à Mutama</p>
+                <div class="h-1 w-12 bg-gradient-to-l from-amber-400 to-transparent"></div>
+            </div>
+
+            <!-- Main Title -->
+            <h1 class="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight animated-text" style="animation-delay: 0.2s;">
+                Votre Refuge de<br><span class="bg-gradient-to-r from-amber-300 to-orange-300 bg-clip-text text-transparent">Luxe & Discrétion</span>
+            </h1>
+
+            <!-- Description -->
+            <div class="space-y-4 mb-12 text-lg md:text-xl lg:text-2xl text-gray-100">
+                <p class="animated-text flex items-center justify-center" style="animation-delay: 0.4s;">
+                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-400 mr-4"></span>
+                    Un cadre calme, propre et sécurisé pour vos séjours
+                </p>
+               
+                <p class="animated-text flex items-center justify-center" style="animation-delay: 0.6s;">
+                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-400 mr-4"></span>
+                    Votre tranquillité et discrétion, notre priorité absolue
+                </p>
+
+                <p class="animated-text flex items-center justify-center" style="animation-delay: 0.8s;">
+                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-400 mr-4"></span>
+                    Service professionnel de classe mondiale
+                </p>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center animated-text" style="animation-delay: 1s;">
+                <a href="reservation.html" class="inline-flex items-center justify-center bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-4 px-10 rounded-lg transition-all duration-300 transform hover:scale-110 hover:shadow-2xl shadow-xl text-lg">
+                    <i class="fas fa-calendar-alt mr-3"></i>Réserver Maintenant
+                </a>
+                <a href="#maisons" class="inline-flex items-center justify-center border-2 border-white hover:border-amber-300 text-white font-bold py-4 px-10 rounded-lg transition-all duration-300 hover:bg-white/10 text-lg backdrop-blur-sm">
+                    <i class="fas fa-arrow-down mr-3"></i>Voir nos Appartements
+                </a>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animated-text" style="animation: floatUp 2s ease-in-out infinite;">
+                <div class="flex flex-col items-center space-y-2">
+                    <p class="text-white text-sm font-semibold">Découvrez plus</p>
+                    <div class="w-6 h-10 border-2 border-amber-400 rounded-full flex justify-center">
+                        <span class="w-1 h-3 bg-amber-400 rounded-full animate-pulse"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: PRÉSENTATION GÉNÉRALE - PREMIUM -->
+    <section id="presentation" class="relative py-24 md:py-32 px-4">
+        <!-- Premium Background Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-b from-white via-gradient-to-br via-gray-50 to-white"></div>
+        
+        <!-- Decorative Elements -->
+        <div class="absolute top-20 -right-40 w-96 h-96 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
+        <div class="absolute bottom-0 -left-40 w-96 h-96 bg-orange-200 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
+
+        <div class="relative max-w-7xl mx-auto">
+            <!-- GRAND MAIN TITLE -->
+            <div class="text-center mb-16 reveal-on-scroll">
+                <h1 class="font-playfair text-3xl md:text-4xl font-bold text-gray-900 mb-4" style="letter-spacing: 1px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
+                    Maison de Passage
+                </h1>
+                <p class="text-lg md:text-xl text-amber-600 font-semibold">Nos Propriétés Exclusives</p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-16 items-center mb-28 zoom-enter">
+                <!-- Image -->
+                <div class="w-full lg:w-1/2 rounded-3xl overflow-hidden shadow-2xl h-80 md:h-96 flex-shrink-0 hover:shadow-3xl transition-all duration-500 group">
+                    <img src="assets/images/presentation/image de presentation de trois maison.jpeg"
+                        alt="Présentation Mutama" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105 group-hover:brightness-110">
+                </div>
+
+                <!-- Texte -->
+                <div class="w-full lg:w-1/2 flex flex-col justify-center space-y-8">
+
+                    <p class="text-xl font-semibold text-gray-900 leading-relaxed">
+                        La Maison de Passage <span class="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent font-bold">Mutama</span> est votre destination idéale pour un séjour confortable, moderne et sécurisé.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Avec nos appartements et chambres élégamment aménagés, nous vous offrons un cadre propice au repos, aux réunions professionnelles ou aux escapades touristiques. Notre équipe dévouée et professionnelle est là pour assurer votre bien-être et votre discrétion à chaque instant.
+                    </p>
+                    <div class="flex items-center space-x-3 text-amber-600 font-semibold pt-4">
+                        <span class="text-4xl">★★★★★</span>
+                        <div>
+                            <p class="text-gray-900 text-lg">Noté 5/5</p>
+                            <p class="text-gray-600 text-sm">par nos clients satisfaits</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRUST VALUES SECTION - PREMIUM BACKGROUND WITH WHATSAPP STYLE -->
+            <div class="pt-16 relative rounded-3xl overflow-hidden border-t-2 border-gradient-to-r from-transparent via-amber-300 to-transparent">
+                <!-- WhatsApp Style Background Pattern -->
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+                    style="background-image: 
+                    url('data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Cdefs%3E%3ClinearGradient id=%22whatsappGrad%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%23f0f0f0%22 /%3E%3Cstop offset=%2250%25%22 style=%22stop-color:%23 rgba(226, 175, 35, 0.95) %22 /%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%23f5f5f5%22 /%3E%3C/linearGradient%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence baseFrequency=%220.9%22 numOctaves=%222%22 result=%22noise%22 /%3E%3CfeDisplacementMap in=%22SourceGraphic%22 in2=%22noise%22 scale=%221%22 /%3E%3C/filter%3E%3Cpattern id=%22whatsappPattern%22 x=%220%22 y=%220%22 width=%2220%22 height=%2220%22 patternUnits=%22userSpaceOnUse%22%3E%3Ccircle cx=%2210%22 cy=%2210%22 r=%221.5%22 fill=%22%23d4af37%22 opacity=%220.15%22 /%3E%3C/pattern%3E%3C/defs%3E%3Crect width=%22100%22 height=%22100%22 fill=%22url(%23whatsappGrad)%22 /%3E%3Crect width=%22100%22 height=%22100%22 fill=%22url(%23whatsappPattern)%22 /%3E%3C/svg%3E'), 
+                    linear-gradient(135deg, rgba(240, 240, 240, 0.95) 30%, rgba(255, 255, 255, 0.98) 20%, rgba(226, 175, 35, 0.95) 100%);
+                    background-attachment: fixed;">
+                </div>
+                
+                <!-- Decorative Accent Elements -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-full mix-blend-screen filter blur-3xl opacity-5 z-0"></div>
+                <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full mix-blend-screen filter blur-3xl opacity-8 z-0"></div>
+
+                <!-- Content -->
+                <div class="relative z-10 px-12 md:px-16 py-20">
+                    <h3 class="text-center font-playfair text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">Nos Valeurs Fondamentales</h3>
+                    <p class="text-center text-amber-50 text-lg mb-16 max-w-3xl mx-auto drop-shadow-md font-light">
+                        Ce qui nous définit et ce qui nous pousse à offrir l'excellence à chaque instant
+                    </p>
+                
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+                    <!-- Confort -->
+                    <div class="group relative bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border-t-4 border-amber-600 reveal-on-scroll hover:bg-white">
+                        <div class="absolute inset-0 bg-gradient-to-br from-amber-50 via-transparent to-orange-50 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                        <div class="relative z-10">
+                            <div class="text-6xl text-amber-600 mb-4 flex justify-center group-hover:scale-125 transition-transform duration-300">
+                                <i class="fas fa-bed"></i>
+                            </div>
+                            <h3 class="font-playfair text-2xl font-bold text-gray-900 mb-3 text-center">Confort</h3>
+                            <p class="text-gray-700 text-sm text-center leading-relaxed font-medium">Lits de qualité premium et aménagements modernes pour votre bien-être</p>
+                        </div>
+                    </div>
+
+                    <!-- Propreté -->
+                    <div class="group relative bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border-t-4 border-amber-600 reveal-on-scroll hover:bg-white" style="animation-delay: 0.1s;">
+                        <div class="absolute inset-0 bg-gradient-to-br from-amber-50 via-transparent to-orange-50 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                        <div class="relative z-10">
+                            <div class="text-6xl text-amber-600 mb-4 flex justify-center group-hover:scale-125 transition-transform duration-300">
+                                <i class="fas fa-sparkles"></i>
+                            </div>
+                            <h3 class="font-playfair text-2xl font-bold text-gray-900 mb-3 text-center">Propreté</h3>
+                            <p class="text-gray-700 text-sm text-center leading-relaxed font-medium">Nettoyage quotidien impeccable et hygiène stricte garantie</p>
+                        </div>
+                    </div>
+
+                    <!-- Sécurité -->
+                    <div class="group relative bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border-t-4 border-amber-600 reveal-on-scroll hover:bg-white" style="animation-delay: 0.2s;">
+                        <div class="absolute inset-0 bg-gradient-to-br from-amber-50 via-transparent to-orange-50 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                        <div class="relative z-10">
+                            <div class="text-6xl text-amber-600 mb-4 flex justify-center group-hover:scale-125 transition-transform duration-300">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <h3 class="font-playfair text-2xl font-bold text-gray-900 mb-3 text-center">Sécurité</h3>
+                            <p class="text-gray-700 text-sm text-center leading-relaxed font-medium">Accès sécurisé et surveillance professionnelle 24/7</p>
+                        </div>
+                    </div>
+
+                    <!-- Discrétion -->
+                    <div class="group relative bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border-t-4 border-amber-600 reveal-on-scroll hover:bg-white" style="animation-delay: 0.3s;">
+                        <div class="absolute inset-0 bg-gradient-to-br from-amber-50 via-transparent to-orange-50 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                        <div class="relative z-10">
+                            <div class="text-6xl text-amber-600 mb-4 flex justify-center group-hover:scale-125 transition-transform duration-300">
+                                <i class="fas fa-eye-slash"></i>
+                            </div>
+                            <h3 class="font-playfair text-2xl font-bold text-gray-900 mb-3 text-center">Discrétion</h3>
+                            <p class="text-gray-700 text-sm text-center leading-relaxed font-medium">Confidentialité absolue et respect de votre intimité</p>
+                        </div>
+                    </div>
+
+                    <!-- Accueil -->
+                    <div class="group relative bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border-t-4 border-amber-600 reveal-on-scroll hover:bg-white" style="animation-delay: 0.4s;">
+                        <div class="absolute inset-0 bg-gradient-to-br from-amber-50 via-transparent to-orange-50 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                        <div class="relative z-10">
+                            <div class="text-6xl text-amber-600 mb-4 flex justify-center group-hover:scale-125 transition-transform duration-300">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h3 class="font-playfair text-2xl font-bold text-gray-900 mb-3 text-center">Accueil</h3>
+                            <p class="text-gray-700 text-sm text-center leading-relaxed font-medium">Équipe chaleureuse, disponible et à votre écoute</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: NOS MAISONS & CHAMBRES - PREMIUM -->
+    <section id="maisons" class="relative py-24 md:py-32 px-4">
+        <!-- Premium Background -->
+        <div class="absolute inset-0 bg-gradient-to-b from-white via-gradient-to-br via-gray-50 to-white"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-amber-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-orange-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+
+        <div class="relative max-w-7xl mx-auto">
+            <div class="text-center mb-24 reveal-on-scroll" style="animation-delay: 0.1s;">
+                <h2 class="section-title reveal-on-scroll"><i class="fas fa-building text-amber-600 mr-3"></i>Nos Appartements & Chambres Premium</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto reveal-on-scroll" style="animation-delay: 0.1s;">Découvrez notre collection exclusive d'appartements et de chambres conçus pour votre confort maximal</p>
+            </div>
+
+            <!-- Grille des appartements avec design professionnel -->
+            <div id="appartments-with-rooms" class="space-y-32">
+                <!-- Appartements seront chargés par JavaScript -->
+                <div class="flex justify-center items-center py-32">
+                    <div class="text-center">
+                        <div class="inline-block animate-spin mb-6">
+                            <i class="fas fa-spinner text-5xl text-amber-600"></i>
+                        </div>
+                        <p class="text-gray-600 text-lg font-semibold">Chargement des appartements...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+    <!-- SECTION 5: TÉMOIGNAGES - PREMIUM -->
+    <section id="testimonials" class="relative py-24 md:py-32 px-4">
+        <!-- Premium Background with Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-br from-amber-50 via-white to-orange-50"></div>
+        <div class="absolute top-20 left-0 w-96 h-96 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-15"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-orange-200 rounded-full mix-blend-multiply filter blur-3xl opacity-15"></div>
+
+        <div class="relative max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="section-title reveal-on-scroll"><i class="fas fa-quote-left text-amber-600 mr-3"></i>Témoignages de nos Clients Satisfaits</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto reveal-on-scroll" style="animation-delay: 0.1s;">Découvrez ce que nos clients distingués pensent de leur séjour chez Mutama</p>
+            </div>
+
+            <div class="relative w-full max-w-4xl mx-auto h-auto" style="perspective: 1000px; padding: 100px 0;">
+                <!-- Testimonials Circle Container -->
+                <div class="relative w-full h-96" style="position: relative;">
+                <!-- Témoignage 1 -->
+                <div class="absolute group bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-b-4 border-amber-600 reveal-on-scroll" style="width: 320px; left: 50%; transform: translateX(-50%) translateY(0px); top: 0px;">
+                    <div class="relative h-64 overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300">
+                        <img src="assets/images/testimonials/client.png" alt="Marie Durand"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125">
+                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-8 space-y-4">
+                        <div class="flex justify-center">
+                            <span class="inline-block">
+                                <i class="fas fa-star text-amber-400 text-lg"></i>
+                                <i class="fas fa-star text-amber-400 text-lg"></i>
+                                <i class="fas fa-star text-amber-400 text-lg"></i>
+                                <i class="fas fa-star text-amber-400 text-lg"></i>
+                                <i class="fas fa-star text-amber-400 text-lg"></i>
+                            </span>
+                        </div>
+                        <blockquote class="text-gray-700 text-base italic leading-relaxed text-center">"Excellent accueil, chambres très propres et confortables. L'équipe est très professionnelle et attentive. Je recommande vivement Mutama pour un séjour inoubliable!"</blockquote>
+                        <div class="text-center pt-4 border-t-2 border-gray-100">
+                            <h4 class="font-playfair text-xl font-bold text-gray-900">Marie Durand</h4>
+                            <p class="text-amber-600 text-sm font-semibold">Touriste Internationale</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Témoignage 2 -->
+                <div class="absolute group bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-b-4 border-amber-600 reveal-on-scroll" style="width: 320px; left: 50%; transform: translateX(-50%) translateX(-180px) translateY(120px); animation-delay: 0.1s;">
+                    <div class="relative h-64 overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300">
+                        <img src="assets/images/testimonials/client1.jpg" alt="Jean Musinga"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125">
+                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-8 space-y-4">
+                        <div class="flex justify-center">
+                            <span class="inline-block">
+                                <i class="fas fa-star text-amber-400 text-lg"></i>
+                                <i class="fas fa-star text-amber-400 text-lg"></i>
+                                <i class="fas fa-star text-amber-400 text-lg"></i>
+                                <i class="fas fa-star text-amber-400 text-lg"></i>
+                                <i class="fas fa-star text-amber-400 text-lg"></i>
+                            </span>
+                        </div>
+                        <blockquote class="text-gray-700 text-base italic leading-relaxed text-center">"Service impeccable, équipe très attentive et disponible. Parfait pour les séjours professionnels avec une discrétion garantie. Je reviens certainement!"</blockquote>
+                        <div class="text-center pt-4 border-t-2 border-gray-100">
+                            <h4 class="font-playfair text-xl font-bold text-gray-900">Jean Musinga</h4>
+                            <p class="text-amber-600 text-sm font-semibold">Voyageur d'Affaires</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Témoignage 3 -->
+                <div class="group bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-b-4 border-amber-600 reveal-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="relative h-64 overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300">
+                        <img src="assets/images/testimonials/client2.png" alt="Sophie Nkurunziza"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125">
+                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-8 space-y-4">
+                        <div class="flex justify-center">
+                            <span class="inline-block">
+                                <i class="fas fa-star text-amber-400 text-lg"></i>
+                                <i class="fas fa-star text-amber-400 text-lg"></i>
+                                <i class="fas fa-star text-amber-400 text-lg"></i>
+                                <i class="fas fa-star text-amber-400 text-lg"></i>
+                                <i class="fas fa-star text-amber-400 text-lg"></i>
+                            </span>
+                        </div>
+                        <blockquote class="text-gray-700 text-base italic leading-relaxed text-center">"Endroit merveilleux avec une excellente sécurité et une ambiance chaleureuse. L'équipe m'a fait sentir très bien accueilli comme à la maison!"</blockquote>
+                        <div class="text-center pt-4 border-t-2 border-gray-100">
+                            <h4 class="font-playfair text-xl font-bold text-gray-900">Sophie Nkurunziza</h4>
+                            <p class="text-amber-600 text-sm font-semibold">Touriste Familial</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: GALERIE - PREVIEW -->
+    <section id="galerie" class="relative py-24 md:py-32 px-4">
+        <!-- Premium Background -->
+        <div class="absolute inset-0 bg-gradient-to-b from-white via-purple-50 to-white"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-15"></div>
+
+        <div class="relative max-w-7xl mx-auto">
+            <div class="text-center mb-24">
+                <h2 class="section-title reveal-on-scroll"><i class="fas fa-images text-amber-600 mr-3"></i>Galerie Premium</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto reveal-on-scroll" style="animation-delay: 0.1s;">Explorez la beauté et l'élégance de nos appartements, chambres et équipements</p>
+            </div>
+            
+            <!-- Grille d'images avec cartes améliorées -->
+            <div id="gallery-preview" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 reveal-on-scroll" style="animation-delay: 0.2s;">
+                <div class="col-span-full flex justify-center items-center h-48">
+                    <div class="animate-spin">
+                        <i class="fas fa-spinner text-5xl text-amber-600"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bouton vers galerie complète -->
+            <div class="text-center reveal-on-scroll" style="animation-delay: 0.3s;">
+                <a href="galerie.html"
+                    class="inline-block bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-semibold py-4 px-10 rounded-lg transition-all duration-300 transform hover:scale-110 hover:shadow-2xl shadow-lg flex items-center">
+                    <i class="fas fa-images mr-3 text-lg"></i>Voir la Galerie Complète
+                </a>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <footer class="bg-gray-900 text-white py-12 px-4 mt-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-home text-amber-600 text-2xl"></i>
+                        <h3 class="font-playfair text-2xl font-bold">Mutama</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Maison de Passage Mutama</p>
+                    <p class="text-gray-500 text-xs mt-2">Votre destination idéale pour un séjour confortable et tranquille.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Liens Rapides</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#home" class="hover:text-amber-600 transition">Accueil</a></li>
+                        <li><a href="#maisons" class="hover:text-amber-600 transition">Appartements</a></li>
+                        <li><a href="galerie.html" class="hover:text-amber-600 transition">Galerie</a></li>
+                        <li><a href="reservation.html" class="hover:text-amber-600 transition">Réserver</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Nous Contacter</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-center space-x-2"><i class="fas fa-phone text-amber-600"></i><span>+257 XX XXX XXXX</span></li>
+                        <li class="flex items-center space-x-2"><i class="fas fa-envelope text-amber-600"></i><span>contact@mutama.bi</span></li>
+                        <li class="flex items-center space-x-2"><i class="fas fa-map-marker-alt text-amber-600"></i><span>Burundi</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center">
+                <p class="text-gray-500 text-sm">© 2026 Mutama. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Base API URL
+        const API_BASE = 'https://capbio.bi/mutama/api/';
+
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.animation = `${entry.target.className.includes('reveal-on-scroll') ? 'reveal-from-bottom' : 'zoom-in-gentle'} 0.8s ease-out forwards`;
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with reveal-on-scroll class
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Utility: create image element
+        function createImage(url, alt) {
+            const img = document.createElement('img');
+            img.src = url;
+            img.alt = alt || '';
+            img.className = 'rounded w-full';
+            return img;
+        }
+
+        // Fetch and display apartments with PREMIUM DESIGN
+        Promise.all([
+            fetch(API_BASE + 'appartment').then(res => res.json()),
+            fetch(API_BASE + 'room').then(res => res.json())
+        ])
+            .then(([apartments, rooms]) => {
+                const container = document.getElementById('appartments-with-rooms');
+                container.innerHTML = '';
+
+                if (!apartments || apartments.length === 0) {
+                    container.innerHTML = '<div class="text-center py-20"><p class="text-gray-600 text-lg">Aucun appartement disponible</p></div>';
+                    return;
+                }
+
+                apartments.forEach((app, index) => {
+                    const appRooms = rooms.filter(room => room.appartment_id === app.id || room.appartmentId === app.id);
+
+                    // APARTMENT SECTION HEADER WITH LARGE TITLE
+                    const sectionHeader = document.createElement('div');
+                    sectionHeader.className = 'mb-12 pb-8 text-center reveal-on-scroll';
+                    
+                    const apartmentTitle = document.createElement('h2');
+                    apartmentTitle.className = 'font-playfair text-3xl md:text-4xl font-bold text-gray-900';
+                    
+                    // Convert number to Roman numerals for elegant display
+                    const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+                    const titleNumber = romanNumerals[index] || (index + 1);
+                    apartmentTitle.textContent = `Appartement Maison ${titleNumber}`;
+                    apartmentTitle.style.letterSpacing = '0.5px';
+                    
+                    sectionHeader.appendChild(apartmentTitle);
+                    container.appendChild(sectionHeader);
+
+                    // MAIN APARTMENT CARD
+                    const appCard = document.createElement('div');
+                    appCard.className = 'group bg-white rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 border border-gray-100 zoom-enter';
+
+                    // GRID LAYOUT: Image + Info
+                    const gridWrapper = document.createElement('div');
+                    gridWrapper.className = 'grid grid-cols-1 lg:grid-cols-2 gap-0';
+
+                    // LEFT: PREMIUM IMAGE WITH OVERLAY
+                    const imageSection = document.createElement('div');
+                    imageSection.className = 'relative overflow-hidden bg-gradient-to-br from-gray-300 via-gray-200 to-gray-300 h-80 md:h-full';
+                    
+                    if (app.images && app.images.length > 0) {
+                        const img = document.createElement('img');
+                        img.src = app.images[0].url || app.images[0];
+                        img.alt = app.name;
+                        img.className = 'w-full h-full object-cover transition-transform duration-700 group-hover:scale-110';
+                        img.onerror = function() { 
+                            this.style.display = 'none';
+                            imageSection.innerHTML += '<div class="absolute inset-0 flex items-center justify-center"><i class="fas fa-image text-5xl text-gray-400"></i></div>';
+                        };
+                        imageSection.appendChild(img);
+                    }
+
+                    // Overlay badges
+                    const badge = document.createElement('div');
+                    badge.className = 'absolute top-6 right-6 bg-amber-600 text-white px-5 py-2 rounded-full font-bold text-sm shadow-lg';
+                    badge.innerHTML = '<i class="fas fa-crown mr-2"></i>Premium';
+                    imageSection.appendChild(badge);
+
+                    // Rating overlay
+                    const ratingBadge = document.createElement('div');
+                    ratingBadge.className = 'absolute bottom-6 left-6 bg-white text-gray-900 px-5 py-3 rounded-xl font-bold shadow-lg backdrop-blur-sm';
+                    ratingBadge.innerHTML = '<i class="fas fa-star text-amber-400 mr-2"></i>5.0 · 128 avis';
+                    imageSection.appendChild(ratingBadge);
+
+                    // Dark overlay on hover
+                    const darkOverlay = document.createElement('div');
+                    darkOverlay.className = 'absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300';
+                    imageSection.appendChild(darkOverlay);
+
+                    gridWrapper.appendChild(imageSection);
+
+                    // RIGHT: CONTENT SECTION
+                    const contentSection = document.createElement('div');
+                    contentSection.className = 'p-10 md:p-12 flex flex-col justify-between';
+
+                    // HEADER
+                    const headerDiv = document.createElement('div');
+                    headerDiv.className = 'mb-8';
+
+                    const title = document.createElement('h3');
+                    title.className = 'font-playfair text-4xl font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors';
+                    title.textContent = app.name;
+                    headerDiv.appendChild(title);
+
+                    const location = document.createElement('p');
+                    location.className = 'text-amber-600 font-semibold flex items-center';
+                    location.innerHTML = '<i class="fas fa-map-marker-alt mr-2"></i>Bujumbura, Burundi';
+                    headerDiv.appendChild(location);
+
+                    contentSection.appendChild(headerDiv);
+
+                    // DESCRIPTION
+                    const descDiv = document.createElement('div');
+                    descDiv.className = 'mb-8';
+
+                    const descLabel = document.createElement('p');
+                    descLabel.className = 'text-gray-600 text-base leading-relaxed';
+                    descLabel.textContent = app.description || 'Un magnifique appartement pour votre séjour';
+                    descDiv.appendChild(descLabel);
+
+                    contentSection.appendChild(descDiv);
+
+                    // FEATURES
+                    const featuresDiv = document.createElement('div');
+                    featuresDiv.className = 'grid grid-cols-2 gap-4 mb-8 p-6 bg-gray-50 rounded-2xl';
+                    featuresDiv.innerHTML = `
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-wifi text-amber-600 text-xl"></i>
+                            <span class="text-sm text-gray-700">WiFi Gratuit</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-shield-alt text-amber-600 text-xl"></i>
+                            <span class="text-sm text-gray-700">Sécurisé 24/7</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-snowflake text-amber-600 text-xl"></i>
+                            <span class="text-sm text-gray-700">Climatisé</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-eye-slash text-amber-600 text-xl"></i>
+                            <span class="text-sm text-gray-700">Discrétion</span>
+                        </div>
+                    `;
+                    contentSection.appendChild(featuresDiv);
+
+                    // PRICE & CTA
+                    const ctaDiv = document.createElement('div');
+                    ctaDiv.className = 'flex items-center justify-between pt-8 border-t border-gray-200';
+
+                    if (app.price) {
+                        const priceBox = document.createElement('div');
+                        priceBox.className = 'flex flex-col';
+                        priceBox.innerHTML = `
+                            <span class="text-gray-600 text-sm">À partir de</span>
+                            <span class="font-playfair text-3xl font-bold text-amber-600">${app.price}</span>
+                            <span class="text-gray-600 text-xs">par nuit</span>
+                        `;
+                        ctaDiv.appendChild(priceBox);
+                    }
+
+                    const ctaBtn = document.createElement('a');
+                    ctaBtn.href = 'house-details.html?id=' + app.id;
+                    ctaBtn.className = 'bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-md';
+                    ctaBtn.innerHTML = '<i class="fas fa-arrow-right mr-2"></i>Voir Détails';
+                    ctaDiv.appendChild(ctaBtn);
+
+                    contentSection.appendChild(ctaDiv);
+                    gridWrapper.appendChild(contentSection);
+                    appCard.appendChild(gridWrapper);
+
+                    // ROOMS SECTION - PROFESSIONAL PREMIUM DESIGN
+                    if (appRooms && appRooms.length > 0) {
+                        const roomsWrapper = document.createElement('div');
+                        roomsWrapper.className = 'p-10 md:p-16 bg-gradient-to-br from-slate-50 via-white to-slate-50 border-t-2 border-amber-200';
+
+                        // Section Header
+                        const roomsHeader = document.createElement('div');
+                        roomsHeader.className = 'mb-12';
+                        
+                        const roomsTitle = document.createElement('h4');
+                        roomsTitle.className = 'text-3xl md:text-4xl font-playfair font-bold text-gray-900 mb-3 flex items-center';
+                        roomsTitle.innerHTML = `<i class="fas fa-door-open text-amber-600 mr-4 text-4xl"></i>Chambres Disponibles`;
+                        roomsHeader.appendChild(roomsTitle);
+
+                        const roomCount = document.createElement('p');
+                        roomCount.className = 'text-gray-600 text-lg flex items-center';
+                        roomCount.innerHTML = `<i class="fas fa-bed text-amber-600 mr-2"></i>${appRooms.length} chambre${appRooms.length > 1 ? 's' : ''} premium à votre disposition`;
+                        roomsHeader.appendChild(roomCount);
+
+                        roomsWrapper.appendChild(roomsHeader);
+
+                        const roomsGrid = document.createElement('div');
+                        roomsGrid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10';
+
+                        appRooms.forEach((room, roomIdx) => {
+                            const roomCard = document.createElement('div');
+                            roomCard.className = 'group relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-gray-100 hover:border-amber-300 transform hover:-translate-y-4 zoom-enter';
+
+                            // Room Number Badge
+                            const roomBadge = document.createElement('div');
+                            roomBadge.className = 'absolute top-5 right-5 bg-gradient-to-r from-amber-600 to-orange-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg shadow-lg z-10';
+                            roomBadge.textContent = roomIdx + 1;
+                            roomCard.appendChild(roomBadge);
+
+                            // Room image container
+                            const roomImgDiv = document.createElement('div');
+                            roomImgDiv.className = 'relative overflow-hidden bg-gradient-to-br from-gray-400 to-gray-500 h-72 w-full';
+                            
+                            if (room.images && room.images.length > 0) {
+                                const roomImg = document.createElement('img');
+                                roomImg.src = room.images[0].url || room.images[0];
+                                roomImg.alt = room.name;
+                                roomImg.className = 'w-full h-full object-cover transition-transform duration-700 group-hover:scale-130';
+                                roomImg.onerror = function() { 
+                                    this.style.display = 'none';
+                                    roomImgDiv.innerHTML += '<div class="absolute inset-0 flex items-center justify-center"><i class="fas fa-image text-6xl text-gray-400"></i></div>';
+                                };
+                                roomImgDiv.appendChild(roomImg);
+                            } else {
+                                roomImgDiv.innerHTML = '<div class="absolute inset-0 flex items-center justify-center"><i class="fas fa-image text-6xl text-gray-400"></i></div>';
+                            }
+
+                            // Image overlay with rating
+                            const imgOverlay = document.createElement('div');
+                            imgOverlay.className = 'absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6';
+                            imgOverlay.innerHTML = '<div class="text-white"><p class="text-sm font-semibold flex items-center"><i class="fas fa-star text-yellow-400 mr-2"></i>Très apprécié</p></div>';
+                            roomImgDiv.appendChild(imgOverlay);
+
+                            roomCard.appendChild(roomImgDiv);
+
+                            // Room info section
+                            const roomInfo = document.createElement('div');
+                            roomInfo.className = 'p-8 space-y-6';
+                            
+                            // Room name and type
+                            const nameDiv = document.createElement('div');
+                            const roomName = document.createElement('h5');
+                            roomName.className = 'font-playfair text-2xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors';
+                            roomName.textContent = room.name;
+                            nameDiv.appendChild(roomName);
+
+                            const roomType = document.createElement('p');
+                            roomType.className = 'text-amber-600 font-semibold text-sm';
+                            roomType.innerHTML = '<i class="fas fa-crown mr-1"></i>Chambre Premium';
+                            nameDiv.appendChild(roomType);
+                            roomInfo.appendChild(nameDiv);
+
+                            // Description
+                            const descDiv = document.createElement('div');
+                            const roomDesc = document.createElement('p');
+                            roomDesc.className = 'text-gray-600 text-sm leading-relaxed line-clamp-2';
+                            roomDesc.textContent = room.description || 'Chambre confortable et élégamment aménagée';
+                            descDiv.appendChild(roomDesc);
+                            roomInfo.appendChild(descDiv);
+
+                            // Amenities/Features
+                            const amenitiesDiv = document.createElement('div');
+                            amenitiesDiv.className = 'space-y-3 py-4 border-t-2 border-b-2 border-gray-100';
+                            amenitiesDiv.innerHTML = `
+                                <div class="flex items-center space-x-3 text-sm">
+                                    <i class="fas fa-wifi text-amber-600 text-lg w-5"></i>
+                                    <span class="text-gray-700">WiFi haute vitesse</span>
+                                </div>
+                                <div class="flex items-center space-x-3 text-sm">
+                                    <i class="fas fa-wind text-amber-600 text-lg w-5"></i>
+                                    <span class="text-gray-700">Climatisation réversible</span>
+                                </div>
+                                <div class="flex items-center space-x-3 text-sm">
+                                    <i class="fas fa-tv text-amber-600 text-lg w-5"></i>
+                                    <span class="text-gray-700">Smart TV 55"</span>
+                                </div>
+                                <div class="flex items-center space-x-3 text-sm">
+                                    <i class="fas fa-lock text-amber-600 text-lg w-5"></i>
+                                    <span class="text-gray-700">Coffre-fort privé</span>
+                                </div>
+                            `;
+                            roomInfo.appendChild(amenitiesDiv);
+
+                            // Room size and bed info
+                            const detailsDiv = document.createElement('div');
+                            detailsDiv.className = 'grid grid-cols-2 gap-4';
+                            detailsDiv.innerHTML = `
+                                <div class="bg-gradient-to-br from-amber-50 to-orange-50 p-4 rounded-xl border border-amber-100">
+                                    <p class="text-xs text-gray-600 font-semibold mb-1">SURFACE</p>
+                                    <p class="text-lg font-bold text-gray-900">25 m²</p>
+                                </div>
+                                <div class="bg-gradient-to-br from-amber-50 to-orange-50 p-4 rounded-xl border border-amber-100">
+                                    <p class="text-xs text-gray-600 font-semibold mb-1">LIT</p>
+                                    <p class="text-lg font-bold text-gray-900">King 180cm</p>
+                                </div>
+                            `;
+                            roomInfo.appendChild(detailsDiv);
+
+                            // CTA Button
+                            const ctaBtnDiv = document.createElement('div');
+                            const ctaBtn = document.createElement('a');
+                            ctaBtn.href = 'house-details.html?id=' + app.id + '&room=' + room.id;
+                            ctaBtn.className = 'block w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-bold py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-lg text-center';
+                            ctaBtn.innerHTML = '<i class="fas fa-eye mr-2"></i>Voir Détails & Réserver';
+                            ctaBtnDiv.appendChild(ctaBtn);
+                            roomInfo.appendChild(ctaBtnDiv);
+
+                            roomCard.appendChild(roomInfo);
+                            roomsGrid.appendChild(roomCard);
+                        });
+
+                        roomsWrapper.appendChild(roomsGrid);
+                        appCard.appendChild(roomsWrapper);
+                    }
+
+                    // SEPARATOR (except last)
+                    const separator = document.createElement('div');
+                    separator.className = 'mt-0';
+
+                    const container_div = document.createElement('div');
+                    container_div.appendChild(appCard);
+                    
+                    if (index < apartments.length - 1) {
+                        const divider = document.createElement('div');
+                        divider.className = 'h-1 bg-gradient-to-r from-transparent via-amber-300 to-transparent my-20';
+                        container_div.appendChild(divider);
+                    }
+
+                    container.appendChild(container_div);
+                });
+            })
+            .catch(err => {
+                console.error('Erreur chargement appartements:', err);
+                document.getElementById('appartments-with-rooms').innerHTML = `
+                    <div class="text-center py-20">
+                        <i class="fas fa-exclamation-circle text-5xl text-red-500 mb-4"></i>
+                        <p class="text-red-600 text-lg font-semibold">Erreur lors du chargement des appartements</p>
+                        <p class="text-gray-600 text-sm mt-2">Veuillez rafraîchir la page</p>
+                    </div>
+                `;
+            });
+
+        // Fetch and display gallery preview - 4 images
+        Promise.all([
+            fetch(API_BASE + 'file').then(res => res.json()),
+            fetch(API_BASE + 'appartment').then(res => res.json()),
+            fetch(API_BASE + 'room').then(res => res.json()),
+            fetch(API_BASE + 'post').then(res => res.json())
+        ])
+            .then(([files, apartments, rooms, posts]) => {
+                const container = document.getElementById('gallery-preview');
+                container.innerHTML = '';
+
+                // Collectionner toutes les images
+                let allImages = [];
+
+                // Images des appartements
+                apartments.forEach(apt => {
+                    if (apt.images && apt.images.length > 0) {
+                        apt.images.forEach(img => allImages.push(img.url || img));
+                    }
+                });
+
+                // Images des chambres
+                rooms.forEach(room => {
+                    if (room.images && room.images.length > 0) {
+                        room.images.forEach(img => allImages.push(img.url || img));
+                    }
+                });
+
+                // Images des posts
+                posts.forEach(post => {
+                    if (post.heroImage) {
+                        allImages.push(post.heroImage.url || post.heroImage);
+                    }
+                });
+
+                // Fichiers (images)
+                if (files && files.length > 0) {
+                    files.forEach(file => {
+                        if (file.url) {
+                            allImages.push(file.url);
+                        }
+                    });
+                }
+
+                // Afficher les 4 premières images avec design amélioré
+                allImages.slice(0, 4).forEach(imageUrl => {
+                    const imgWrapper = document.createElement('div');
+                    imgWrapper.className = 'group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl gallery-item h-56 bg-gradient-to-br from-gray-300 to-gray-400 transition-all duration-500 transform hover:-translate-y-2 zoom-enter';
+
+                    const img = document.createElement('img');
+                    img.src = imageUrl;
+                    img.alt = 'Galerie';
+                    img.className = 'w-full h-full object-cover transition-transform duration-700 group-hover:scale-125';
+                    img.onerror = function() { this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23ddd" width="400" height="300"/%3E%3Ctext x="50%" y="50%" font-size="16" fill="%23999" text-anchor="middle" dy=".3em"%3EImage indisponible%3C/text%3E%3C/svg%3E'; };
+
+                    // Overlay on hover
+                    const overlay = document.createElement('div');
+                    overlay.className = 'absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300';
+
+                    imgWrapper.appendChild(img);
+                    imgWrapper.appendChild(overlay);
+                    container.appendChild(imgWrapper);
+                });
+            })
+            .catch(err => console.error('Erreur galerie:', err));
+
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>

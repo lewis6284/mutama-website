@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Maison de Passage Mutama</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(217, 119, 6, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(217, 119, 6, 0.4); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .btn-primary {
+            @apply bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 ease transform hover:scale-105 hover:shadow-lg shadow-md;
+        }
+
+        .section-title {
+            @apply font-playfair text-4xl md:text-5xl font-bold text-gray-900 mb-6;
+        }
+
+        .contact-card {
+            @apply bg-white p-8 rounded-2xl shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl border border-gray-100;
+        }
+
+        .card-hover {
+            @apply transition-all duration-300;
+        }
+
+        .form-input {
+            @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-amber-600 transition-all duration-300 focus:shadow-lg focus:ring-2 focus:ring-amber-200;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- HEADER / NAVIGATION -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <i class="fas fa-home text-amber-600 text-3xl"></i>
+                    <div>
+                        <h1 class="font-playfair text-2xl font-bold text-gray-900">Mutama</h1>
+                        <p class="text-xs text-gray-600">Maison de Passage</p>
+                    </div>
+                </a>
+                
+                <div id="menu-toggle" class="md:hidden cursor-pointer">
+                    <i class="fas fa-bars text-2xl text-gray-900"></i>
+                </div>
+                
+                <ul id="nav-menu" class="hidden md:flex space-x-8 text-gray-700 font-medium">
+                    <li><a href="index.html#home" class="hover:text-amber-600 transition">Accueil</a></li>
+                    <li><a href="index.html#maisons" class="hover:text-amber-600 transition">Appartements</a></li>
+                    <li><a href="index.html#galerie" class="hover:text-amber-600 transition">Galerie</a></li>
+                    <li><a href="reservation.html" class="hover:text-amber-600 transition">Réserver</a></li>
+                    <li><a href="contact.html" class="text-amber-600">Contact</a></li>
+                </ul>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden mt-4 flex flex-col space-y-3">
+                <a href="index.html#home" class="text-gray-700 hover:text-amber-600">Accueil</a>
+                <a href="index.html#maisons" class="text-gray-700 hover:text-amber-600">Appartements</a>
+                <a href="index.html#galerie" class="text-gray-700 hover:text-amber-600">Galerie</a>
+                <a href="reservation.html" class="text-gray-700 hover:text-amber-600">Réserver</a>
+                <a href="contact.html" class="text-amber-600">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="relative py-20 md:py-28 px-4 bg-gradient-to-b from-white via-gradient-to-br via-gray-50 to-white">
+        <!-- Premium Background Decorations -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-20 right-0 w-96 h-96 bg-amber-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-orange-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto">
+            <div class="text-center mb-20 reveal-on-scroll">
+                <h1 class="section-title">
+                    <i class="fas fa-envelope text-amber-600 mr-3"></i>Contactez-nous
+                </h1>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Nous sommes disponibles pour répondre à vos questions et vous aider à trouver le séjour parfait
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20 reveal-on-scroll" style="animation-delay: 0.1s;">
+                <!-- Formulaire de contact -->
+                <div class="bg-white rounded-3xl p-10 shadow-2xl border border-gray-100">
+                    <h2 class="text-3xl font-playfair font-bold text-gray-900 mb-8 flex items-center">
+                        <i class="fas fa-pen-fancy text-amber-600 mr-3 text-2xl"></i>Envoyez-nous un Message
+                    </h2>
+                    
+                    <form id="contact-form" class="space-y-6">
+                        <div class="group">
+                            <label class="block text-gray-900 font-semibold mb-3 group-hover:text-amber-600 transition-colors">
+                                <i class="fas fa-user text-amber-600 mr-2"></i>Nom complet
+                            </label>
+                            <input type="text" id="contact-nom" placeholder="Jean Dupont" class="form-input" required>
+                        </div>
+                        
+                        <div class="group">
+                            <label class="block text-gray-900 font-semibold mb-3 group-hover:text-amber-600 transition-colors">
+                                <i class="fas fa-envelope text-amber-600 mr-2"></i>Adresse email
+                            </label>
+                            <input type="email" id="contact-email" placeholder="jean@example.com" class="form-input" required>
+                        </div>
+                        
+                        <div class="group">
+                            <label class="block text-gray-900 font-semibold mb-3 group-hover:text-amber-600 transition-colors">
+                                <i class="fas fa-phone text-amber-600 mr-2"></i>Téléphone
+                            </label>
+                            <input type="tel" id="contact-tel" placeholder="+257 61 XXX XXX" class="form-input">
+                        </div>
+                        
+                        <div class="group">
+                            <label class="block text-gray-900 font-semibold mb-3 group-hover:text-amber-600 transition-colors">
+                                <i class="fas fa-tag text-amber-600 mr-2"></i>Sujet
+                            </label>
+                            <select id="contact-sujet" class="form-input" required>
+                                <option value="">-- Sélectionner --</option>
+                                <option value="reservation">Question sur une réservation</option>
+                                <option value="disponibilite">Disponibilité des chambres</option>
+                                <option value="tarifs">Tarifs et promotions</option>
+                                <option value="services">Services et équipements</option>
+                                <option value="autre">Autre question</option>
+                            </select>
+                        </div>
+                        
+                        <div class="group">
+                            <label class="block text-gray-900 font-semibold mb-3 group-hover:text-amber-600 transition-colors">
+                                <i class="fas fa-comment text-amber-600 mr-2"></i>Message
+                            </label>
+                            <textarea id="contact-message" rows="6" placeholder="Votre message..." class="form-input" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full btn-primary text-lg py-4 font-bold flex items-center justify-center hover:shadow-2xl">
+                            <i class="fas fa-paper-plane mr-2"></i>Envoyer le Message
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Informations de contact -->
+                <div>
+                    <h2 class="text-3xl font-playfair font-bold text-gray-900 mb-8 flex items-center">
+                        <i class="fas fa-info-circle text-amber-600 mr-3 text-2xl"></i>Nos Coordonnées
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <!-- Adresse -->
+                        <div class="contact-card rounded-2xl group bg-gradient-to-br from-white to-amber-50 border-l-4 border-amber-600">
+                            <div class="flex items-start space-x-5">
+                                <div class="bg-gradient-to-br from-amber-100 to-amber-50 rounded-full p-4 group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-map-marker-alt text-amber-600 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900 mb-2">Adresse</h3>
+                                    <p class="text-gray-600">
+                                        Bujumbura, Burundi<br>
+                                        <span class="text-sm text-gray-500">Quartier Rohero</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Téléphone -->
+                        <div class="contact-card rounded-2xl group bg-gradient-to-br from-white to-amber-50 border-l-4 border-amber-600 hover:border-amber-700">
+                            <div class="flex items-start space-x-5">
+                                <div class="bg-gradient-to-br from-amber-100 to-amber-50 rounded-full p-4 group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-phone text-amber-600 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900 mb-2">Téléphone</h3>
+                                    <p class="text-gray-600">
+                                        <a href="tel:+25761000000" class="hover:text-amber-600 transition font-semibold">+257 61 XXX XXX</a><br>
+                                        <span class="text-sm text-gray-500">Disponible 24/7</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- WhatsApp -->
+                        <div class="contact-card rounded-2xl group bg-gradient-to-br from-white to-green-50 border-l-4 border-green-600 shadow-lg hover:shadow-green-200/50">
+                            <div class="flex items-start space-x-5">
+                                <div class="bg-gradient-to-br from-green-100 to-green-50 rounded-full p-4 group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fab fa-whatsapp text-green-600 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900 mb-2">WhatsApp</h3>
+                                    <p class="text-gray-600">
+                                        <a href="https://wa.me/257XXXXXXXXX" target="_blank" class="hover:text-green-600 transition font-semibold flex items-center">
+                                            Nous écrire sur WhatsApp
+                                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                                        </a><br>
+                                        <span class="text-sm text-gray-500">Réponse rapide garantie</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="contact-card rounded-2xl group bg-gradient-to-br from-white to-amber-50 border-l-4 border-amber-600 hover:border-amber-700">
+                            <div class="flex items-start space-x-5">
+                                <div class="bg-gradient-to-br from-amber-100 to-amber-50 rounded-full p-4 group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-envelope text-amber-600 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900 mb-2">Email</h3>
+                                    <p class="text-gray-600">
+                                        <a href="mailto:info@mutama.bi" class="hover:text-amber-600 transition font-semibold">info@mutama.bi</a><br>
+                                        <span class="text-sm text-gray-500">Réponse rapide garantie</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Horaires -->
+                        <div class="contact-card rounded-2xl group bg-gradient-to-br from-white to-amber-50 border-l-4 border-amber-600 hover:border-amber-700">
+                            <div class="flex items-start space-x-5">
+                                <div class="bg-gradient-to-br from-amber-100 to-amber-50 rounded-full p-4 group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-clock text-amber-600 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900 mb-2">Horaires d'Ouverture</h3>
+                                    <p class="text-gray-600">
+                                        <strong>Lundi - Dimanche</strong><br>
+                                        <span>08:00 - 22:00</span><br>
+                                        <span class="text-sm text-gray-500">Service de nuit disponible</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GOOGLE MAP EMBED -->
+            <div class="mb-24 reveal-on-scroll" style="animation-delay: 0.2s;">
+                <h2 class="text-3xl font-playfair font-bold text-gray-900 mb-8 text-center">
+                    <i class="fas fa-map text-amber-600 mr-3"></i>Notre Localisation
+                </h2>
+                <div class="rounded-3xl overflow-hidden shadow-2xl h-96 bg-gray-300 hover:shadow-3xl transition-all duration-300 border-2 border-gray-100 group">
+                    <!-- Google Map Embed -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.5894238471156!2d29.368523!3d-3.361962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19c172ec12345678%3A0x1234567890abcdef!2sBujumbura%2C%20Burundi!5e0!3m2!1sfr!2sbi!4v1234567890" width="100%" height="100%" style="border:0; transition: filter 0.3s;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="group-hover:brightness-110"></iframe>
+                </div>
+            </div>
+            
+            <!-- FAQ Section - PREMIUM DESIGN -->
+            <div class="bg-gradient-to-br from-amber-50 via-white to-orange-50 p-12 md:p-16 rounded-3xl shadow-xl border-2 border-amber-100 reveal-on-scroll" style="animation-delay: 0.3s;">
+                <h2 class="text-3xl font-playfair font-bold text-gray-900 mb-12 text-center">
+                    <i class="fas fa-question-circle text-amber-600 mr-3"></i>Questions Fréquemment Posées
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="group bg-white p-6 rounded-2xl border-l-4 border-amber-600 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors">
+                            <i class="fas fa-money-bill-wave text-amber-600 mr-2"></i>Quels sont vos tarifs ?
+                        </h3>
+                        <p class="text-gray-600">
+                            Nos tarifs varient selon la chambre et la saison. Contactez-nous pour une offre personnalisée et des tarifs de groupe attractifs.
+                        </p>
+                    </div>
+                    
+                    <div class="group bg-white p-6 rounded-2xl border-l-4 border-amber-600 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors">
+                            <i class="fas fa-undo text-amber-600 mr-2"></i>Puis-je annuler ma réservation ?
+                        </h3>
+                        <p class="text-gray-600">
+                            Oui, les annulations sont possibles jusqu'à 48h avant votre arrivée sans frais. Consultez nos conditions complètes.
+                        </p>
+                    </div>
+                    
+                    <div class="group bg-white p-6 rounded-2xl border-l-4 border-amber-600 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors">
+                            <i class="fas fa-wifi text-amber-600 mr-2"></i>Disposez-vous du WiFi ?
+                        </h3>
+                        <p class="text-gray-600">
+                            Oui, le WiFi haute vitesse gratuit est disponible dans tous nos appartements et les espaces communs.
+                        </p>
+                    </div>
+                    
+                    <div class="group bg-white p-6 rounded-2xl border-l-4 border-amber-600 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors">
+                            <i class="fas fa-car text-amber-600 mr-2"></i>Y a-t-il un parking ?
+                        </h3>
+                        <p class="text-gray-600">
+                            Oui, nous mettons à disposition un parking sécurisé et gratuit pour nos clients, avec surveillance 24/7.
+                        </p>
+                    </div>
+                    
+                    <div class="group bg-white p-6 rounded-2xl border-l-4 border-amber-600 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors">
+                            <i class="fas fa-paw text-amber-600 mr-2"></i>Acceptez-vous les animaux ?
+                        </h3>
+                        <p class="text-gray-600">
+                            Oui, les animaux de compagnie sont acceptés. Veuillez nous en informer à la réservation pour les arrangements.
+                        </p>
+                    </div>
+                    
+                    <div class="group bg-white p-6 rounded-2xl border-l-4 border-amber-600 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors">
+                            <i class="fas fa-users text-amber-600 mr-2"></i>Tarifs pour les groupes ?
+                        </h3>
+                        <p class="text-gray-600">
+                            Nous offrons des tarifs spéciaux et arrangments pour les groupes. Contactez-nous directement pour des devis personnalisés.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-white py-12 px-4 mt-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-home text-amber-600 text-2xl"></i>
+                        <h3 class="font-playfair text-2xl font-bold">Mutama</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Maison de Passage Mutama</p>
+                    <p class="text-gray-500 text-xs mt-2">Votre destination idéale pour un séjour confortable et tranquille.</p>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Liens Rapides</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="index.html" class="hover:text-amber-600 transition">Accueil</a></li>
+                        <li><a href="index.html#maisons" class="hover:text-amber-600 transition">Appartements</a></li>
+                        <li><a href="galerie.html" class="hover:text-amber-600 transition">Galerie</a></li>
+                        <li><a href="reservation.html" class="hover:text-amber-600 transition">Réserver</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Nous Contacter</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-phone text-amber-600"></i>
+                            <span>+257 XX XXX XXXX</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-envelope text-amber-600"></i>
+                            <span>contact@mutama.bi</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-map-marker-alt text-amber-600"></i>
+                            <span>Burundi</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 text-center">
+                <p class="text-gray-500 text-sm">© 2026 Mutama. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.animation = 'slideInUp 0.8s ease-out forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with reveal-on-scroll class
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Gestion du formulaire de contact
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = {
+                nom: document.getElementById('contact-nom').value,
+                email: document.getElementById('contact-email').value,
+                telephone: document.getElementById('contact-tel').value,
+                sujet: document.getElementById('contact-sujet').value,
+                message: document.getElementById('contact-message').value
+            };
+            
+            // Afficher confirmation
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Message envoyé !';
+            btn.classList.remove('from-amber-600', 'to-orange-600');
+            btn.classList.add('from-green-600', 'to-green-700');
+            
+            // Sauvegarder les données (optionnel: envoyer via API)
+            console.log('Message envoyé:', data);
+            localStorage.setItem('lastContact', JSON.stringify(data));
+            
+            // Réinitialiser après 3 secondes
+            setTimeout(() => {
+                this.reset();
+                btn.innerHTML = originalText;
+                btn.classList.remove('from-green-600', 'to-green-700');
+                btn.classList.add('from-amber-600', 'to-orange-600');
+            }, 3000);
+        });
+        
+        // Menu mobile
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

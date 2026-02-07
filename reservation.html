@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réservation - Maison de Passage Mutama</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .btn-primary {
+            @apply bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 ease transform hover:scale-105 hover:shadow-lg;
+        }
+
+        .section-title {
+            @apply font-playfair text-4xl md:text-5xl font-bold text-gray-900 mb-6;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse-scale {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .zoom-enter {
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        .form-input {
+            @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-amber-600 transition-all duration-300;
+        }
+
+        .form-input:focus {
+            @apply shadow-lg;
+        }
+
+        .step {
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+
+        .step:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .step:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- HEADER / NAVIGATION -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <i class="fas fa-home text-amber-600 text-3xl"></i>
+                    <div>
+                        <h1 class="font-playfair text-2xl font-bold text-gray-900">Mutama</h1>
+                        <p class="text-xs text-gray-600">Maison de Passage</p>
+                    </div>
+                </a>
+                
+                <div id="menu-toggle" class="md:hidden cursor-pointer">
+                    <i class="fas fa-bars text-2xl text-gray-900"></i>
+                </div>
+                
+                <ul id="nav-menu" class="hidden md:flex space-x-8 text-gray-700 font-medium">
+                    <li><a href="index.html#home" class="hover:text-amber-600 transition">Accueil</a></li>
+                    <li><a href="index.html#maisons" class="hover:text-amber-600 transition">Appartements</a></li>
+                    <li><a href="index.html#galerie" class="hover:text-amber-600 transition">Galerie</a></li>
+                    <li><a href="reservation.html" class="text-amber-600">Réserver</a></li>
+                    <li><a href="contact.html" class="hover:text-amber-600 transition">Contact</a></li>
+                </ul>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden mt-4 flex flex-col space-y-3">
+                <a href="index.html#home" class="text-gray-700 hover:text-amber-600">Accueil</a>
+                <a href="index.html#maisons" class="text-gray-700 hover:text-amber-600">Appartements</a>
+                <a href="index.html#galerie" class="text-gray-700 hover:text-amber-600">Galerie</a>
+                <a href="reservation.html" class="text-amber-600">Réserver</a>
+                <a href="contact.html" class="text-gray-700 hover:text-amber-600">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="py-16 md:py-24 px-4 bg-blue-50">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="section-title text-center mb-12">
+                <i class="fas fa-calendar-alt text-amber-600 mr-3"></i>Réservation
+            </h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Formulaire de réservation -->
+                <div class="md:col-span-2 bg-white p-10 rounded-2xl shadow-2xl border border-gray-100">
+                    <form id="reservation-form" class="space-y-8">
+                        <!-- Step 1: Sélection du logement -->
+                        <div class="step" id="step-1">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-8 flex items-center">
+                                <span class="bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-full w-12 h-12 flex items-center justify-center mr-4 font-bold text-lg shadow-lg">1</span>
+                                Sélectionner le logement
+                            </h2>
+                            
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-gray-900 font-semibold mb-3">Appartement</label>
+                                    <select id="res-appartement" class="form-input border-2 focus:ring-2 focus:ring-amber-200" required>
+                                        <option value="">-- Sélectionner --</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-900 font-semibold mb-3">Chambre</label>
+                                    <select id="res-chambre" class="form-input border-2 focus:ring-2 focus:ring-amber-200" required>
+                                        <option value="">-- Sélectionner --</option>
+                                    </select>
+                                </div>
+                                
+                                <div id="room-details" class="hidden bg-gradient-to-r from-amber-50 to-orange-50 p-6 rounded-xl border-2 border-amber-200">
+                                    <p class="text-sm text-gray-700 mb-3"><i class="fas fa-tag text-amber-600 mr-2"></i><strong>Prix par nuit:</strong> <span id="room-price" class="text-amber-600 font-bold text-lg">--</span></p>
+                                    <p class="text-sm text-gray-700"><i class="fas fa-align-left text-amber-600 mr-2"></i><strong>Description:</strong> <span id="room-desc" class="text-gray-600">--</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-10 border-gray-200">
+                        
+                        <!-- Step 2: Dates -->
+                        <div class="step" id="step-2">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-8 flex items-center">
+                                <span class="bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-full w-12 h-12 flex items-center justify-center mr-4 font-bold text-lg shadow-lg">2</span>
+                                Choisir les dates
+                            </h2>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <label class="block text-gray-900 font-semibold mb-3">Date d'arrivée</label>
+                                    <input type="date" id="res-date-arrivee" class="form-input border-2 focus:ring-2 focus:ring-amber-200" required>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-900 font-semibold mb-3">Date de départ</label>
+                                    <input type="date" id="res-date-depart" class="form-input border-2 focus:ring-2 focus:ring-amber-200" required>
+                                </div>
+                            </div>
+                            
+                            <div id="duration-info" class="hidden mt-6 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 p-6 rounded-xl shadow-md">
+                                <p class="text-green-800 flex items-center mb-2"><i class="fas fa-calendar-check text-green-600 mr-2"></i><strong>Durée:</strong> <span id="duration" class="font-bold ml-2 text-lg">0</span> nuit(s)</p>
+                                <p class="text-green-800 flex items-center"><i class="fas fa-money-bill-wave text-green-600 mr-2"></i><strong>Total estimé:</strong> <span id="total-price" class="text-lg font-bold ml-2 text-green-700">0</span> FBu</p>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-10 border-gray-200">
+                        
+                        <!-- Step 3: Informations personnelles -->
+                        <div class="step" id="step-3">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-8 flex items-center">
+                                <span class="bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-full w-12 h-12 flex items-center justify-center mr-4 font-bold text-lg shadow-lg">3</span>
+                                Vos informations
+                            </h2>
+                            
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-gray-900 font-semibold mb-3"><i class="fas fa-user text-amber-600 mr-2"></i>Nom complet</label>
+                                    <input type="text" id="res-nom" placeholder="Jean Dupont" class="form-input border-2 focus:ring-2 focus:ring-amber-200" required>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-900 font-semibold mb-3"><i class="fas fa-envelope text-amber-600 mr-2"></i>Adresse email</label>
+                                    <input type="email" id="res-email" placeholder="jean@example.com" class="form-input border-2 focus:ring-2 focus:ring-amber-200" required>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-900 font-semibold mb-3"><i class="fas fa-phone text-amber-600 mr-2"></i>Numéro de téléphone</label>
+                                    <input type="tel" id="res-telephone" placeholder="+257 61 XXX XXX" class="form-input border-2 focus:ring-2 focus:ring-amber-200" required>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-900 font-semibold mb-3"><i class="fas fa-comment text-amber-600 mr-2"></i>Message spécial (optionnel)</label>
+                                    <textarea id="res-message" rows="4" placeholder="Demandes spéciales, allergies, préférences..." class="form-input border-2 focus:ring-2 focus:ring-amber-200"></textarea>
+                                </div>
+                                
+                                <div class="flex items-start space-x-3 mt-6 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                                    <input type="checkbox" id="terms" class="w-6 h-6 text-amber-600 mt-1" required>
+                                    <label for="terms" class="text-gray-700 text-sm leading-relaxed">J'accepte les <strong>conditions d'utilisation</strong> et j'ai compris que cette réservation doit être confirmée par téléphone</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-6 mt-12">
+                            <button type="reset" class="flex-1 px-6 py-4 border-2 border-amber-600 text-amber-600 font-bold rounded-lg hover:bg-amber-50 transition-all duration-300 text-lg flex items-center justify-center">
+                                <i class="fas fa-redo mr-2"></i>Réinitialiser
+                            </button>
+                            <button type="submit" class="flex-1 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-lg flex items-center justify-center shadow-lg">
+                                <i class="fas fa-check-circle mr-2"></i>Confirmer la Réservation
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Résumé de la réservation -->
+                <div class="bg-gradient-to-br from-white to-gray-50 p-10 rounded-2xl shadow-2xl h-fit border border-gray-100 sticky top-28">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-8 flex items-center">
+                        <i class="fas fa-clipboard-list text-amber-600 mr-3"></i>Résumé
+                    </h3>
+                    
+                    <div class="space-y-5 border-b-2 border-gray-200 pb-6 mb-6">
+                        <div class="bg-amber-50 p-4 rounded-lg">
+                            <p class="text-xs text-gray-600 uppercase font-semibold">Appartement</p>
+                            <p id="summary-apt" class="font-bold text-gray-900 text-lg mt-1">Non sélectionné</p>
+                        </div>
+                        
+                        <div class="bg-amber-50 p-4 rounded-lg">
+                            <p class="text-xs text-gray-600 uppercase font-semibold">Chambre</p>
+                            <p id="summary-room" class="font-bold text-gray-900 text-lg mt-1">Non sélectionné</p>
+                        </div>
+                        
+                        <div class="bg-amber-50 p-4 rounded-lg">
+                            <p class="text-xs text-gray-600 uppercase font-semibold">Dates</p>
+                            <p id="summary-dates" class="font-bold text-gray-900 text-lg mt-1">À définir</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3 text-sm mb-8 bg-gray-100 p-6 rounded-xl">
+                        <div class="flex justify-between">
+                            <span class="text-gray-700">Prix/nuit</span>
+                            <span id="summary-price" class="font-bold text-gray-900">0 FBu</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-700">Nuits</span>
+                            <span id="summary-nights" class="font-bold text-gray-900">0</span>
+                        </div>
+                        <div class="flex justify-between pt-4 border-t-2 border-gray-300">
+                            <span class="font-bold text-gray-900 text-base">Total</span>
+                            <span id="summary-total" class="font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent text-xl">0 FBu</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-blue-50 to-cyan-50 border-2 border-blue-300 p-5 rounded-xl text-sm text-blue-900 shadow-md">
+                        <i class="fas fa-info-circle mr-2 text-blue-600"></i>
+                        <strong>Info:</strong> Confirmez votre réservation pour procéder à la confirmation
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-100 py-12 px-4 mt-16">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-home text-amber-600 text-2xl"></i>
+                        <h3 class="font-playfair text-xl font-bold">Mutama</h3>
+                    </div>
+                    <p class="text-gray-400">Votre maison de passage confortable et sécurisée</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Navigation</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="index.html" class="hover:text-amber-400">Accueil</a></li>
+                        <li><a href="index.html#maisons" class="hover:text-amber-400">Appartements</a></li>
+                        <li><a href="index.html#galerie" class="hover:text-amber-400">Galerie</a></li>
+                        <li><a href="contact.html" class="hover:text-amber-400">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Contact</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-phone text-amber-600 mr-2"></i>+257 61 XXX XXX</li>
+                        <li><i class="fas fa-envelope text-amber-600 mr-2"></i>info@mutama.bi</li>
+                        <li><i class="fas fa-map-marker-alt text-amber-600 mr-2"></i>Bujumbura</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Nos Valeurs</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-check text-amber-600 mr-2"></i>Confort</li>
+                        <li><i class="fas fa-check text-amber-600 mr-2"></i>Propreté</li>
+                        <li><i class="fas fa-check text-amber-600 mr-2"></i>Sécurité</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <p class="text-center text-gray-400">
+                    <i class="fas fa-copyright mr-2"></i>2024 Maison de Passage Mutama. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/api.js"></script>
+    <script>
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.animation = 'slideInUp 0.8s ease-out forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with reveal-on-scroll class
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        let allData = {
+            apartments: [],
+            rooms: [],
+            posts: [],
+            files: []
+        };
+        
+        // Charger les données
+        async function loadData() {
+            allData = await API.loadAllData();
+            populateSelects();
+            loadSavedData();
+        }
+        
+        // Remplir les sélecteurs
+        function populateSelects() {
+            const aptSelect = document.getElementById('res-appartement');
+            
+            if (allData.apartments.length > 0) {
+                aptSelect.innerHTML = '<option value="">-- Sélectionner --</option>' +
+                    allData.apartments.map(apt => 
+                        `<option value="${apt.id}">${apt.name || 'Appartement'}</option>`
+                    ).join('');
+                
+                aptSelect.addEventListener('change', function() {
+                    const selectedAptId = this.value;
+                    const roomsForApt = allData.rooms.filter(room => {
+                        const roomAptId = room.appartmentId || room.appartment_id || room.apartmentId;
+                        return roomAptId == selectedAptId;
+                    });
+                    
+                    const roomSelect = document.getElementById('res-chambre');
+                    roomSelect.innerHTML = '<option value="">-- Sélectionner --</option>' +
+                        roomsForApt.map(room => {
+                            const price = room.price || room.prix || room.prixParNuit || room.price_per_night || 0;
+                            const desc = room.description || room.details || '';
+                            return `<option value="${room.id}" data-price="${price}" data-desc="${desc}">${room.name || room.title || 'Chambre'}</option>`;
+                        }).join('');
+                    
+                    document.getElementById('summary-apt').textContent = 
+                        allData.apartments.find(a => a.id == selectedAptId)?.name || 'Non sélectionné';
+                });
+            }
+        }
+        
+        // Charger les données sauvegardées
+        function loadSavedData() {
+            const saved = localStorage.getItem('reservationData');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('res-appartement').value = data.appartement;
+                document.getElementById('res-appartement').dispatchEvent(new Event('change'));
+                
+                setTimeout(() => {
+                    document.getElementById('res-chambre').value = data.chambre;
+                    document.getElementById('res-chambre').dispatchEvent(new Event('change'));
+                }, 100);
+                
+                document.getElementById('res-date-arrivee').value = data.dateArrivee;
+                document.getElementById('res-date-depart').value = data.dateDepart;
+                document.getElementById('res-nom').value = data.nom;
+                document.getElementById('res-email').value = data.email;
+                document.getElementById('res-telephone').value = data.telephone;
+                
+                updateDuration();
+                localStorage.removeItem('reservationData');
+            }
+        }
+        
+        // Événements des champs
+        document.getElementById('res-chambre').addEventListener('change', function() {
+            const option = this.options[this.selectedIndex];
+            const price = option.dataset.price || 0;
+            const desc = option.dataset.desc || '';
+            
+            document.getElementById('summary-room').textContent = this.options[this.selectedIndex].text;
+            document.getElementById('room-price').textContent = `${price} FBu`;
+            document.getElementById('room-desc').textContent = desc;
+            
+            if (this.value) {
+                document.getElementById('room-details').classList.remove('hidden');
+            }
+            
+            updateDuration();
+        });
+        
+        document.getElementById('res-date-arrivee').addEventListener('change', updateDuration);
+        document.getElementById('res-date-depart').addEventListener('change', updateDuration);
+        
+        function updateDuration() {
+            const startDate = new Date(document.getElementById('res-date-arrivee').value);
+            const endDate = new Date(document.getElementById('res-date-depart').value);
+            
+            if (startDate && endDate && endDate > startDate) {
+                const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+                const price = parseFloat(document.getElementById('room-price').textContent) || 0;
+                const total = nights * price;
+                
+                document.getElementById('duration-info').classList.remove('hidden');
+                document.getElementById('duration').textContent = nights;
+                document.getElementById('total-price').textContent = total.toLocaleString();
+                
+                document.getElementById('summary-dates').textContent = 
+                    `${startDate.toLocaleDateString('fr-FR')} → ${endDate.toLocaleDateString('fr-FR')}`;
+                document.getElementById('summary-nights').textContent = nights;
+                document.getElementById('summary-total').textContent = `${total.toLocaleString()} FBu`;
+            }
+        }
+        
+        // Soumission du formulaire
+        document.getElementById('reservation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = {
+                appartement: document.getElementById('res-appartement').value,
+                chambre: document.getElementById('res-chambre').value,
+                dateArrivee: document.getElementById('res-date-arrivee').value,
+                dateDepart: document.getElementById('res-date-depart').value,
+                nom: document.getElementById('res-nom').value,
+                email: document.getElementById('res-email').value,
+                telephone: document.getElementById('res-telephone').value,
+                message: document.getElementById('res-message').value
+            };
+            
+            console.log('Réservation confirmée:', data);
+            alert('✅ Réservation confirmée!\n\nNous vous contacterons bientôt pour confirmer les détails et effectuer le paiement.');
+            localStorage.setItem('reservationConfirmed', JSON.stringify(data));
+            setTimeout(() => window.location.href = 'index.html', 2000);
+        });
+        
+        // Menu mobile
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Initialiser
+        loadData();
+    </script>
+</body>
+</html>
