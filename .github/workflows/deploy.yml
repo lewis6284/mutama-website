@@ -28,3 +28,12 @@ jobs:
             **/.env
             **/.github/**
             **/README.md
+            **/API_GUIDE.md
+            **/CHANGELOG.md
+            **/DATA_VERIFICATION.md
+            **/DOCUMENTATION.md
+            **/QUICK_API_GUIDE.md
+            **/QUICK_START.md
+            **/RESUME_FINAL.md
+            **/VERIFICATION.md
+            **/test-api.html
