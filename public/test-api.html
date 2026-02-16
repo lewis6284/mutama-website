@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API - Mutama</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .code-block { background: #1e293b; color: #e2e8f0; padding: 16px; border-radius: 8px; overflow-x: auto; font-family: monospace; }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+        .info { color: #3b82f6; }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-4xl font-bold mb-8">🧪 Teste des APIs Mutama</h1>
+        
+        <div id="test-results" class="space-y-6">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <div class="flex items-center space-x-3 mb-4">
+                    <i class="fas fa-spinner animate-spin text-xl text-blue-600"></i>
+                    <h2 class="text-2xl font-bold">Chargement des données...</h2>
+                </div>
+                <p class="text-gray-600">Veuillez patienter pendant la récupération des données...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/api.js"></script>
+    <script>
+        async function testAPIs() {
+            const resultsDiv = document.getElementById('test-results');
+            let html = '';
+            
+            const APIs = [
+                { name: 'Appartements', method: 'getApartments', url: 'https://capbio.bi/mutama/api/appartment' },
+                { name: 'Chambres', method: 'getRooms', url: 'https://capbio.bi/mutama/api/room' },
+                { name: 'Posts/Témoignages', method: 'getPosts', url: 'https://capbio.bi/mutama/api/post' },
+                { name: 'Fichiers/Images', method: 'getFiles', url: 'https://capbio.bi/mutama/api/file' }
+            ];
+            
+            for (const api of APIs) {
+                try {
+                    const startTime = performance.now();
+                    const data = await API[api.method]();
+                    const endTime = performance.now();
+                    
+                    const isArray = Array.isArray(data);
+                    const count = isArray ? data.length : (data.data ? data.data.length : 0);
+                    const time = (endTime - startTime).toFixed(2);
+                    
+                    html += `
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-check-circle text-2xl success"></i>
+                                    <div>
+                                        <h3 class="text-xl font-bold">${api.name}</h3>
+                                        <p class="text-sm text-gray-600">${api.url}</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-2xl font-bold success">${count}</p>
+                                    <p class="text-sm text-gray-600">${time}ms</p>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <details class="bg-gray-50 p-4 rounded">
+                                    <summary class="cursor-pointer font-semibold text-gray-900 flex items-center space-x-2">
+                                        <span class="info">ℹ️</span>
+                                        <span>Afficher les données (${count} éléments)</span>
+                                    </summary>
+                                    <pre class="mt-4 code-block text-xs">${JSON.stringify(data, null, 2).substring(0, 1000)}...</pre>
+                                </details>
+                            </div>
+                        </div>
+                    `;
+                } catch (error) {
+                    html += `
+                        <div class="bg-white p-6 rounded-lg shadow border-l-4 border-red-500">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-exclamation-circle text-2xl error"></i>
+                                <div>
+                                    <h3 class="text-xl font-bold">${api.name}</h3>
+                                    <p class="text-sm error">${error.message}</p>
+                                    <p class="text-xs text-gray-600 mt-1">${api.url}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Test complet
+            try {
+                const startTime = performance.now();
+                const allData = await API.loadAllData();
+                const endTime = performance.now();
+                const allImages = API.getAllImages(allData.apartments, allData.rooms, allData.posts, allData.files);
+                
+                html += `
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg shadow border-l-4 border-green-500">
+                        <h2 class="text-2xl font-bold mb-4">✅ Synthèse Complète</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="bg-white p-4 rounded">
+                                <p class="text-gray-600 text-sm">Appartements</p>
+                                <p class="text-3xl font-bold success">${allData.apartments.length}</p>
+                            </div>
+                            <div class="bg-white p-4 rounded">
+                                <p class="text-gray-600 text-sm">Chambres</p>
+                                <p class="text-3xl font-bold success">${allData.rooms.length}</p>
+                            </div>
+                            <div class="bg-white p-4 rounded">
+                                <p class="text-gray-600 text-sm">Posts</p>
+                                <p class="text-3xl font-bold success">${allData.posts.length}</p>
+                            </div>
+                            <div class="bg-white p-4 rounded">
+                                <p class="text-gray-600 text-sm">Images</p>
+                                <p class="text-3xl font-bold success">${allImages.length}</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mt-4">⏱️ Temps total: ${(endTime - startTime).toFixed(2)}ms</p>
+                        <div class="mt-4 p-4 bg-blue-50 rounded border border-blue-200">
+                            <p class="font-semibold text-blue-900">✨ Le site est prêt!</p>
+                            <p class="text-sm text-blue-800 mt-1">Toutes les données sont correctement récupérées depuis les APIs.</p>
+                            <a href="index.html" class="inline-block mt-3 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-semibold transition">
+                                Aller à l'accueil →
+                            </a>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                html += `
+                    <div class="bg-red-50 p-6 rounded-lg shadow border-l-4 border-red-500">
+                        <h2 class="text-2xl font-bold error mb-2">❌ Erreur lors du chargement complet</h2>
+                        <p class="error">${error.message}</p>
+                    </div>
+                `;
+            }
+            
+            resultsDiv.innerHTML = html;
+        }
+        
+        // Lancer les tests au chargement
+        document.addEventListener('DOMContentLoaded', testAPIs);
+    </script>
+</body>
+</html>
