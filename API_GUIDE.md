@@ -14,7 +14,8 @@
 ### URLs des APIs
 
 ```javascript
-const API_BASE_URL = 'https://capbio.bi/mutama/api';
+// La configuration centrale se trouve dans public/assets/js/config.js
+const API_BASE_URL = CONFIG.API_BASE;
 
 // Les 4 endpoints disponibles :
 GET /appartment   → Tous les appartements
@@ -545,7 +546,7 @@ Après cache:            <500ms
 **Solution:**
 1. Vérifier la console (F12 > Console)
 2. Vérifier l'URL dans api.js
-3. Tester directement: https://capbio.bi/mutama/api/appartment
+3. Tester directement: https://severinhouse.bi/api/appartment
 4. Contacter le supporteur backend
 
 ### Aucune donnée affichée

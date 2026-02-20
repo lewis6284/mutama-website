@@ -28,7 +28,7 @@
 
 **Data Flow**:
 ```
-API_BASE = 'https://capbio.bi/mutama/api/'
+API_BASE = CONFIG.API_BASE (from assets/js/config.js)
 Promise.all([apartments, rooms]) → Display apartments with rooms
 Promise.all([files, apartments, rooms, posts]) → Display gallery preview
 ```

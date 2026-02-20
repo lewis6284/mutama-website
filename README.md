@@ -63,15 +63,15 @@ mutama-website/
 
 ## 🔌 Intégration des APIs
 
-### APIs Utilisées
-```
-Base URL: https://capbio.bi/mutama/api
+### API Configuration
+The API base URL is centrally configured in `public/assets/js/config.js`.
+
+- **Current Base URL**: `https://severinhouse.bi/api/`
 
 1. /appartment  - Récupère tous les appartements
 2. /room       - Récupère toutes les chambres
 3. /post       - Récupère les posts/témoignages
 4. /file       - Récupère tous les fichiers/images
-```
 
 ### Utilisation dans le Code
 

@@ -29,10 +29,10 @@
 ## 🔌 APIS DISPONIBLES
 
 ```
-🔗 https://capbio.bi/mutama/api/appartment    → Appartements
-🔗 https://capbio.bi/mutama/api/room          → Chambres
-🔗 https://capbio.bi/mutama/api/post          → Posts (Témoignages)
-🔗 https://capbio.bi/mutama/api/file          → Fichiers (Images)
+🔗 https://severinhouse.bi/api/appartment    → Appartements
+🔗 https://severinhouse.bi/api/room          → Chambres
+🔗 https://severinhouse.bi/api/post          → Posts (Témoignages)
+🔗 https://severinhouse.bi/api/file          → Fichiers (Images)
 ```
 
 ---
